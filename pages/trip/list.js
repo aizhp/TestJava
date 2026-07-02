@@ -1,4 +1,5 @@
 const util = require('../../utils/util.js')
+const share = require('../../utils/share.js')
 
 Page({
   data: {
@@ -27,7 +28,8 @@ Page({
       .sort((a, b) => new Date(b.startDate.replace(/-/g, '/')) - new Date(a.startDate.replace(/-/g, '/')))
       .map(t => ({
         ...t,
-        statusLabel: util.getTripStatusLabel(t.status)
+        statusLabel: util.getTripStatusLabel(t.status),
+        total: Math.round((t.subsidy + t.expenses) * 100) / 100
       }))
 
     const stats = util.calculateTripStats(trips)
@@ -64,5 +66,13 @@ Page({
     wx.navigateTo({
       url: `/pages/trip/detail?id=${id}`
     })
+  },
+
+  onShareAppMessage() {
+    return share.getShareConfig('tripList')
+  },
+
+  onShareTimeline() {
+    return share.getShareConfig('tripList')
   }
 })

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>我的假期 - 图标生成工具</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #FFF5F8; padding: 40px; text-align: center; }
+  h1 { color: #FF6B9D; }
+  .tip { color: #666; margin: 20px 0; line-height: 1.8; }
+  .group { background: #fff; border-radius: 16px; padding: 30px; margin: 20px auto; max-width: 800px; box-shadow: 0 4px 20px rgba(255,107,157,0.1); }
+  canvas { display: none; }
+  .preview { display: inline-block; margin: 10px; }
+  .preview img { border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .preview p { margin: 8px 0 0; font-size: 14px; color: #666; }
+  button { background: #FF6B9D; color: #fff; border: none; padding: 12px 32px; border-radius: 24px; font-size: 16px; cursor: pointer; margin: 10px; }
+  button:hover { background: #FF8FB1; }
+</style>
+</head>
+<body>
+<h1>🐰 我的假期 - 图标生成工具</h1>
+<p class="tip">点击下方按钮，生成并下载小程序所需的 PNG 图标和分享配图</p>
+
+<div class="group">
+  <h3>小程序图标 (logo.png 256x256)</h3>
+  <button onclick="gen('logo', 256, 'logo.png')">生成并下载</button>
+  <div id="logoPreview" class="preview" style="display:none"><img width="120"><p>预览 (120x120)</p></div>
+</div>
+
+<div class="group">
+  <h3>分享配图 (share.png 500x400)</h3>
+  <button onclick="gen('share', null, 'share.png')">生成并下载</button>
+  <div id="sharePreview" class="preview" style="display:none"><img width="300"><p>预览 (300x240)</p></div>
+</div>
+
+<div class="group">
+  <h3>tabBar 图标 (81x81，6个)</h3>
+  <button onclick="genAllTabs()">生成并下载全部</button>
+</div>
+
+<p class="tip">生成的文件请放到小程序的 images/ 目录下</p>
+
+<canvas id="canvas"></canvas>
+
+<script>
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function drawLogo(size) {
+  const canvas = document.getElementById('canvas');
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  // 渐变背景
+  const g = ctx.createLinearGradient(0, 0, size, size);
+  g.addColorStop(0, '#FF6B9D'); g.addColorStop(1, '#FFB6C1');
+  roundRect(ctx, 0, 0, size, size, size * 0.22);
+  ctx.fillStyle = g; ctx.fill();
+  // 装饰圆点
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.beginPath(); ctx.arc(size*0.16, size*0.17, size*0.023, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(size*0.84, size*0.19, size*0.03, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(size*0.82, size*0.82, size*0.02, 0, 7); ctx.fill();
+  // 日历卡片
+  const cx = size*0.227, cy = size*0.28, cw = size*0.547, ch = size*0.47;
+  ctx.fillStyle = '#FFFFFF';
+  ctx.shadowColor = 'rgba(0,0,0,0.15)'; ctx.shadowBlur = size*0.025; ctx.shadowOffsetY = size*0.016;
+  roundRect(ctx, cx, cy, cw, ch, size*0.078); ctx.fill();
+  ctx.shadowColor = 'transparent';
+  // 顶部红条
+  ctx.fillStyle = '#FF6B9D';
+  roundRect(ctx, cx, cy, cw, ch*0.3, size*0.078); ctx.fill();
+  ctx.fillRect(cx, cy + ch*0.18, cw, ch*0.12);
+  // 挂钉
+  ctx.fillStyle = '#FF4D6D';
+  roundRect(ctx, cx+cw*0.19, cy-size*0.04, size*0.03, size*0.094, size*0.016); ctx.fill();
+  roundRect(ctx, cx+cw*0.75, cy-size*0.04, size*0.03, size*0.094, size*0.016); ctx.fill();
+  // 三圆点
+  const dy = cy + ch*0.55;
+  ['#FFE8F0','#E8F0FF','#FFF4E8'].forEach((c,i)=>{
+    ctx.fillStyle = c;
+    ctx.beginPath(); ctx.arc(cx+cw*(0.21+i*0.29), dy, size*0.039, 0, 7); ctx.fill();
+  });
+  // 文字"假期"
+  ctx.fillStyle = '#FF6B9D';
+  ctx.font = 'bold ' + size*0.133 + 'px "PingFang SC", sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('假期', size/2, cy+ch*0.82);
+  // 兔耳
+  ctx.save();
+  ctx.translate(size*0.766, size*0.234);
+  ctx.rotate(0.35);
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.beginPath(); ctx.ellipse(0, 0, size*0.055, size*0.11, 0, 0, 7); ctx.fill();
+  ctx.fillStyle = 'rgba(255,182,193,0.8)';
+  ctx.beginPath(); ctx.ellipse(-size*0.008, size*0.008, size*0.023, size*0.07, 0, 0, 7); ctx.fill();
+  ctx.restore();
+  return canvas;
+}
+
+function drawShare() {
+  const canvas = document.getElementById('canvas');
+  canvas.width = 500; canvas.height = 400;
+  const ctx = canvas.getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, 500, 400);
+  g.addColorStop(0, '#FF6B9D'); g.addColorStop(0.5, '#FF8FB1'); g.addColorStop(1, '#FFB6C1');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 500, 400);
+  // 装饰圆点
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  [[50,60,10],[450,50,14],[460,350,9],[40,350,12],[250,40,6]].forEach(p=>{
+    ctx.beginPath(); ctx.arc(p[0],p[1],p[2],0,7); ctx.fill();
+  });
+  // 标题
+  ctx.fillStyle = '#FFFFFF';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  ctx.font = 'bold 56px "PingFang SC", sans-serif';
+  ctx.fillText('我的假期', 250, 120);
+  ctx.font = '24px "PingFang SC", sans-serif';
+  ctx.globalAlpha = 0.9;
+  ctx.fillText('假期 & 出差管理小助手 🐰', 250, 160);
+  ctx.globalAlpha = 1;
+  // 卡片
+  drawMiniCard(ctx, 70, 200, 170, 150, '#FF6B9D', '🌴', '年假余额', '5', '剩余天数', '#FFE8F0');
+  drawMiniCard(ctx, 260, 200, 170, 150, '#5B8FF9', '✈️', '出差统计', '3', '本月天数', '#E8F0FF');
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.font = '20px "PingFang SC", sans-serif';
+  ctx.fillText('轻松记录，清晰明了', 250, 380);
+  return canvas;
+}
+
+function drawMiniCard(ctx, x, y, w, h, color, emoji, label, num, sub, dotColor) {
+  ctx.shadowColor = 'rgba(0,0,0,0.15)'; ctx.shadowBlur = 6; ctx.shadowOffsetY = 6;
+  const g2 = ctx.createLinearGradient(0, y, 0, y+h);
+  g2.addColorStop(0, '#FFFFFF'); g2.addColorStop(1, '#FFF5F8');
+  ctx.fillStyle = g2;
+  roundRect(ctx, x, y, w, h, 24); ctx.fill();
+  ctx.shadowColor = 'transparent';
+  ctx.fillStyle = dotColor;
+  ctx.beginPath(); ctx.arc(x+35, y+40, 20, 0, 7); ctx.fill();
+  ctx.font = '22px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(emoji, x+35, y+42);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = color; ctx.font = 'bold 22px "PingFang SC", sans-serif';
+  ctx.fillText(label, x+65, y+42);
+  ctx.font = 'bold 48px "PingFang SC", sans-serif';
+  ctx.fillText(num, x+w/2-30, y+95);
+  ctx.fillStyle = '#999'; ctx.font = '20px "PingFang SC", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(sub, x+w/2, y+120);
+}
+
+function drawTabIcon(name, color, size) {
+  const canvas = document.getElementById('canvas');
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, size, size);
+  ctx.fillStyle = color;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  const emojiMap = { home: '🏠', vacation: '🌴', trip: '✈️', mine: '🐰' };
+  ctx.font = size * 0.7 + 'px sans-serif';
+  ctx.fillText(emojiMap[name], size/2, size/2);
+  return canvas;
+}
+
+function download(canvas, filename) {
+  canvas.toBlob(function(blob){
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+  });
+}
+
+function gen(type, size, filename) {
+  let canvas;
+  if (type === 'logo') canvas = drawLogo(size);
+  else if (type === 'share') canvas = drawShare();
+  download(canvas, filename);
+  const previewId = type + 'Preview';
+  const url = canvas.toDataURL();
+  document.getElementById(previewId).style.display = 'inline-block';
+  document.getElementById(previewId).querySelector('img').src = url;
+}
+
+function genAllTabs() {
+  const tabs = [
+    ['home', 'home.png', '#999'],
+    ['home', 'home-active.png', '#FF6B9D'],
+    ['vacation', 'vacation.png', '#999'],
+    ['vacation', 'vacation-active.png', '#FF6B9D'],
+    ['trip', 'trip.png', '#999'],
+    ['trip', 'trip-active.png', '#FF6B9D'],
+    ['mine', 'mine.png', '#999'],
+    ['mine', 'mine-active.png', '#FF6B9D']
+  ];
+  tabs.forEach((t, i) => {
+    setTimeout(() => {
+      drawTabIcon(t[0], t[2], 81);
+      download(document.getElementById('canvas'), t[1]);
+    }, i * 300);
+  });
+  alert('开始下载8个tabBar图标，请留意浏览器下载');
+}
+</script>
+</body>
+</html>

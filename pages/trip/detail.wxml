@@ -60,7 +60,7 @@
     </view>
     <view class="total-row">
       <text class="total-label">费用合计</text>
-      <text class="total-amount">¥{{trip.subsidy + trip.expenses}}</text>
+      <text class="total-amount">¥{{trip.total}}</text>
     </view>
   </view>
 

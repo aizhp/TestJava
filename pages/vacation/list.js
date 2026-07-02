@@ -1,4 +1,5 @@
 const util = require('../../utils/util.js')
+const share = require('../../utils/share.js')
 
 Page({
   data: {
@@ -72,7 +73,7 @@ Page({
       success: (res) => {
         if (res.confirm) {
           const records = wx.getStorageSync('vacationRecords') || []
-          const newRecords = records.filter(r => r.id !== id)
+          const newRecords = records.filter(r => String(r.id) !== String(id))
           wx.setStorageSync('vacationRecords', newRecords)
           this.loadData()
           wx.showToast({
@@ -82,5 +83,13 @@ Page({
         }
       }
     })
+  },
+
+  onShareAppMessage() {
+    return share.getShareConfig('vacationList')
+  },
+
+  onShareTimeline() {
+    return share.getShareConfig('vacationList')
   }
 })

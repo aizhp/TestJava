@@ -75,6 +75,11 @@
   font-weight: 500;
 }
 
+.type-item.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
 .form-row {
   display: flex;
   justify-content: space-between;

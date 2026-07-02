@@ -43,6 +43,7 @@
   "libVersion": "3.0.0",
   "appid": "touristappid",
   "projectname": "我的假期",
+  "cloudfunctionRoot": "cloudfunctions/",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",

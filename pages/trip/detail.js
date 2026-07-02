@@ -1,4 +1,5 @@
 const util = require('../../utils/util.js')
+const share = require('../../utils/share.js')
 
 Page({
   data: {
@@ -7,15 +8,20 @@ Page({
   },
 
   onLoad(options) {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
     const id = options.id
     this.loadTrip(id)
   },
 
   loadTrip(id) {
     const trips = wx.getStorageSync('tripRecords') || []
-    const trip = trips.find(t => t.id == id)
+    const trip = trips.find(t => String(t.id) === String(id))
     if (trip) {
       trip.statusLabel = util.getTripStatusLabel(trip.status)
+      trip.total = Math.round((trip.subsidy + trip.expenses) * 100) / 100
       this.setData({
         trip,
         expenses: trip.expenseDetails || []
@@ -26,7 +32,7 @@ Page({
   changeStatus(e) {
     const status = e.currentTarget.dataset.status
     const trips = wx.getStorageSync('tripRecords') || []
-    const index = trips.findIndex(t => t.id == this.data.trip.id)
+    const index = trips.findIndex(t => String(t.id) === String(this.data.trip.id))
     if (index > -1) {
       trips[index].status = status
       wx.setStorageSync('tripRecords', trips)
@@ -53,7 +59,7 @@ Page({
       success: (res) => {
         if (res.confirm) {
           let trips = wx.getStorageSync('tripRecords') || []
-          trips = trips.filter(t => t.id != this.data.trip.id)
+          trips = trips.filter(t => String(t.id) !== String(this.data.trip.id))
           wx.setStorageSync('tripRecords', trips)
           wx.showToast({
             title: '删除成功',
@@ -65,5 +71,13 @@ Page({
         }
       }
     })
+  },
+
+  onShareAppMessage() {
+    return share.getShareConfig('tripDetail', this.data.trip)
+  },
+
+  onShareTimeline() {
+    return share.getShareConfig('tripDetail', this.data.trip)
   }
 })

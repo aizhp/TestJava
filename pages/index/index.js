@@ -1,7 +1,9 @@
 const util = require('../../utils/util.js')
+const share = require('../../utils/share.js')
 
 Page({
   data: {
+    statusBarHeight: 20,
     greeting: '',
     todayStr: '',
     vacation: {
@@ -26,6 +28,12 @@ Page({
   },
 
   onLoad() {
+    const sysInfo = wx.getSystemInfoSync()
+    this.setData({ statusBarHeight: sysInfo.statusBarHeight || 20 })
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
     this.loadData()
   },
 
@@ -100,5 +108,17 @@ Page({
     wx.navigateTo({
       url: `/pages/trip/detail?id=${id}`
     })
+  },
+
+  onShareAppMessage() {
+    return share.getShareConfig('index')
+  },
+
+  onShareTimeline() {
+    return share.getShareConfig('index')
+  },
+
+  copyLink() {
+    share.copyShareText('index')
   }
 })

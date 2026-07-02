@@ -168,3 +168,67 @@
   color: #ccc;
   padding: 40rpx 0;
 }
+
+.sync-card {
+  margin: 0 30rpx;
+  padding: 32rpx;
+}
+
+.sync-status {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+}
+
+.sync-status-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.sync-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.sync-tips {
+  font-size: 24rpx;
+  color: #FA8C16;
+  background: #FFF7E6;
+  padding: 16rpx 20rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.sync-btns {
+  display: flex;
+  gap: 20rpx;
+}
+
+.sync-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  border-radius: 40rpx;
+  border: none;
+  margin: 0;
+}
+
+.sync-btn::after {
+  border: none;
+}
+
+.sync-btn.upload {
+  background: linear-gradient(135deg, #5B8FF9, #8FB6FF);
+  color: #fff;
+}
+
+.sync-btn.download {
+  background: #E8F0FF;
+  color: #5B8FF9;
+}
+
+.sync-btn[disabled] {
+  opacity: 0.6;
+}

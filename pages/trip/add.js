@@ -40,7 +40,7 @@ Page({
       endDate = startDate
     }
     const days = util.diffDays(startDate, endDate)
-    const subsidy = days * this.data.subsidyPerDay
+    const subsidy = Math.round(days * this.data.subsidyPerDay * 100) / 100
     this.setData({
       startDate,
       endDate,
@@ -59,7 +59,7 @@ Page({
       return
     }
     const days = util.diffDays(this.data.startDate, endDate)
-    const subsidy = days * this.data.subsidyPerDay
+    const subsidy = Math.round(days * this.data.subsidyPerDay * 100) / 100
     this.setData({
       endDate,
       days,
@@ -70,7 +70,7 @@ Page({
   onExpensesInput(e) {
     const value = parseFloat(e.detail.value) || 0
     this.setData({
-      expenses: value
+      expenses: Math.max(0, Math.round(value * 100) / 100)
     })
   },
 

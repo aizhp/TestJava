@@ -52,6 +52,23 @@
   </view>
 
   <view class="setting-section">
+    <view class="section-title">☁️ 云端同步</view>
+    <view class="sync-card card">
+      <view class="sync-status">
+        <text class="sync-status-text">状态：{{cloudReady ? '已开启' : '未开启'}}</text>
+        <text class="sync-time">上次同步：{{syncTime}}</text>
+      </view>
+      <view class="sync-tips" wx:if="{{!cloudReady}}">
+        在 app.js 配置 cloudEnvId 并部署云函数后即可使用
+      </view>
+      <view class="sync-btns">
+        <button class="sync-btn upload" bindtap="uploadToCloud" disabled="{{syncing}}">⬆️ 上传到云端</button>
+        <button class="sync-btn download" bindtap="downloadFromCloud" disabled="{{syncing}}">⬇️ 从云端恢复</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="setting-section">
     <view class="section-title">📦 数据管理</view>
     <view class="setting-list card">
       <view class="setting-item" bindtap="exportData">
@@ -84,6 +101,31 @@
         <view class="setting-left">
           <text class="setting-icon">ℹ️</text>
           <text class="setting-name">关于</text>
+        </view>
+        <view class="setting-right">
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="setting-section">
+    <view class="section-title">📤 分享</view>
+    <view class="setting-list card">
+      <view class="setting-item" bindtap="shareToFriend">
+        <view class="setting-left">
+          <text class="setting-icon">👥</text>
+          <text class="setting-name">分享给朋友/朋友圈</text>
+        </view>
+        <view class="setting-right">
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-divider"></view>
+      <view class="setting-item" bindtap="copyShareLink">
+        <view class="setting-left">
+          <text class="setting-icon">🔗</text>
+          <text class="setting-name">复制分享文案</text>
         </view>
         <view class="setting-right">
           <text class="arrow">›</text>

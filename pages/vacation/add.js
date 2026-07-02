@@ -23,9 +23,13 @@ Page({
   },
 
   switchDirection(e) {
-    this.setData({
-      direction: e.currentTarget.dataset.direction
-    })
+    const direction = e.currentTarget.dataset.direction
+    const update = { direction }
+    // 获得 调休时，类型锁定为调休假
+    if (direction === 'in') {
+      update.type = 'compensatory'
+    }
+    this.setData(update)
   },
 
   selectType(e) {
@@ -43,7 +47,7 @@ Page({
   onDaysChange(e) {
     const value = parseFloat(e.detail.value) || 0
     this.setData({
-      days: value
+      days: Math.max(0, value)
     })
   },
 

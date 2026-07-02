@@ -13,11 +13,11 @@
   <view class="form-card card">
     <view class="form-title">选择类型</view>
     <view class="type-grid">
-      <view class="type-item {{type === item.value ? 'active' : ''}}" 
+      <view class="type-item {{type === item.value ? 'active' : ''}} {{direction === 'in' && item.value !== 'compensatory' ? 'disabled' : ''}}" 
             wx:for="{{typeList}}" 
             wx:key="value"
             data-type="{{item.value}}"
-            bindtap="selectType">
+            bindtap="{{direction === 'in' && item.value !== 'compensatory' ? '' : 'selectType'}}">
         <text>{{item.label}}</text>
       </view>
     </view>

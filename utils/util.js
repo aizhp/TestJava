@@ -128,11 +128,11 @@ const calculateTripStats = (trips) => {
 
   return {
     monthDays,
-    monthSubsidy,
-    monthExpenses,
+    monthSubsidy: Math.round(monthSubsidy * 100) / 100,
+    monthExpenses: Math.round(monthExpenses * 100) / 100,
     totalDays,
-    totalSubsidy,
-    totalExpenses,
+    totalSubsidy: Math.round(totalSubsidy * 100) / 100,
+    totalExpenses: Math.round(totalExpenses * 100) / 100,
     pendingCount
   }
 }

@@ -62,7 +62,7 @@
         </view>
         <view class="footer-item">
           <text class="footer-label">合计</text>
-          <text class="footer-value orange">¥{{item.subsidy + item.expenses}}</text>
+          <text class="footer-value orange">¥{{item.total}}</text>
         </view>
       </view>
     </view>
