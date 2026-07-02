@@ -1,0 +1,145 @@
+<view class="page">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="greeting-row">
+        <view class="greeting-text">
+          <text class="greeting">{{greeting}}呀～</text>
+          <text class="today">{{todayStr}}</text>
+        </view>
+        <view class="avatar">
+          <text class="avatar-emoji">🐰</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view class="vacation-card card">
+      <view class="card-title-row">
+        <text class="card-title">🏖️ 假期余额</text>
+        <text class="see-more" bindtap="goToVacationList">查看全部 →</text>
+      </view>
+      <view class="vacation-items">
+        <view class="vacation-item annual">
+          <view class="vacation-icon">🌴</view>
+          <view class="vacation-info">
+            <view class="vacation-name">年假</view>
+            <view class="vacation-days">
+              <text class="days-num">{{vacation.annualLeft}}</text>
+              <text class="days-unit">天</text>
+            </view>
+            <view class="vacation-progress">
+              <view class="progress-bar">
+                <view class="progress-fill annual-fill" style="width: {{vacation.annualUsed / vacation.annualTotal * 100}}%"></view>
+              </view>
+              <view class="progress-text">已用 {{vacation.annualUsed}} / {{vacation.annualTotal}} 天</view>
+            </view>
+          </view>
+        </view>
+        <view class="divider"></view>
+        <view class="vacation-item comp">
+          <view class="vacation-icon">⏰</view>
+          <view class="vacation-info">
+            <view class="vacation-name">调休假</view>
+            <view class="vacation-days">
+              <text class="days-num">{{vacation.compLeft}}</text>
+              <text class="days-unit">天</text>
+            </view>
+            <view class="vacation-progress">
+              <view class="progress-bar">
+                <view class="progress-fill comp-fill" style="width: {{vacation.compTotal > 0 ? vacation.compUsed / vacation.compTotal * 100 : 0}}%"></view>
+              </view>
+              <view class="progress-text">已用 {{vacation.compUsed}} / {{vacation.compTotal}} 天</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="quick-actions">
+      <view class="action-btn pink" bindtap="goToAddVacation">
+        <view class="action-icon">📝</view>
+        <view class="action-text">记请假</view>
+      </view>
+      <view class="action-btn blue" bindtap="goToAddTrip">
+        <view class="action-icon">✈️</view>
+        <view class="action-text">记出差</view>
+      </view>
+    </view>
+
+    <view class="trip-card card">
+      <view class="card-title-row">
+        <text class="card-title">✈️ 出差统计</text>
+        <text class="see-more" bindtap="goToTripList">查看全部 →</text>
+      </view>
+      <view class="trip-stats">
+        <view class="trip-stat-item">
+          <view class="stat-num blue">{{tripStats.monthDays}}</view>
+          <view class="stat-label">本月出差(天)</view>
+        </view>
+        <view class="trip-stat-item">
+          <view class="stat-num pink">¥{{tripStats.monthSubsidy}}</view>
+          <view class="stat-label">本月补贴</view>
+        </view>
+        <view class="trip-stat-item">
+          <view class="stat-num orange">¥{{tripStats.monthExpenses}}</view>
+          <view class="stat-label">本月报销</view>
+        </view>
+      </view>
+      <view class="trip-pending" wx:if="{{tripStats.pendingCount > 0}}">
+        <text class="pending-text">⚠️ 还有 {{tripStats.pendingCount}} 笔出差待报销哦～</text>
+      </view>
+    </view>
+
+    <view class="recent-card card" wx:if="{{recentRecords.length > 0}}">
+      <view class="card-title-row">
+        <text class="card-title">📅 最近请假</text>
+      </view>
+      <view class="recent-list">
+        <view class="recent-item" wx:for="{{recentRecords}}" wx:key="id">
+          <view class="recent-left">
+            <view class="recent-dot {{item.type}}"></view>
+            <view class="recent-info">
+              <view class="recent-name">{{item.typeLabel}}</view>
+              <view class="recent-date">{{item.dateCN}}</view>
+            </view>
+          </view>
+          <view class="recent-right">
+            <text class="recent-days {{item.direction}}">{{item.direction === 'out' ? '-' : '+'}}{{item.days}}天</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="recent-card card" wx:if="{{recentTrips.length > 0}}">
+      <view class="card-title-row">
+        <text class="card-title">🧳 最近出差</text>
+      </view>
+      <view class="trip-list">
+        <view class="trip-item" wx:for="{{recentTrips}}" wx:key="id" data-id="{{item.id}}" bindtap="goToTripDetail">
+          <view class="trip-header">
+            <view class="trip-name">{{item.name}}</view>
+            <view class="trip-status tag tag-{{item.status === 'reimbursed' ? 'green' : item.status === 'submitted' ? 'blue' : 'orange'}}">{{item.statusLabel}}</view>
+          </view>
+          <view class="trip-dates">
+            <text class="trip-date">{{item.startDate}} ~ {{item.endDate}}</text>
+            <text class="trip-days-count">{{item.days}}天</text>
+          </view>
+          <view class="trip-money">
+            <view class="money-item">
+              <text class="money-label">补贴</text>
+              <text class="money-value pink">¥{{item.subsidy}}</text>
+            </view>
+            <view class="money-item">
+              <text class="money-label">报销</text>
+              <text class="money-value blue">¥{{item.expenses}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom-space"></view>
+  </view>
+</view>

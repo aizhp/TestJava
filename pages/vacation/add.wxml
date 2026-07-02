@@ -1,0 +1,61 @@
+<view class="page">
+  <view class="direction-switch card">
+    <view class="switch-item {{direction === 'out' ? 'active' : ''}}" data-direction="out" bindtap="switchDirection">
+      <view class="switch-icon">📝</view>
+      <view class="switch-text">请假</view>
+    </view>
+    <view class="switch-item {{direction === 'in' ? 'active' : ''}}" data-direction="in" bindtap="switchDirection">
+      <view class="switch-icon">💪</view>
+      <view class="switch-text">获得调休</view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-title">选择类型</view>
+    <view class="type-grid">
+      <view class="type-item {{type === item.value ? 'active' : ''}}" 
+            wx:for="{{typeList}}" 
+            wx:key="value"
+            data-type="{{item.value}}"
+            bindtap="selectType">
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-row">
+      <view class="form-label">日期</view>
+      <picker mode="date" value="{{date}}" bindchange="onDateChange">
+        <view class="form-value picker">
+          {{date}}
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-row">
+      <view class="form-label">天数</view>
+      <view class="days-picker">
+        <view class="days-btn" bindtap="subtractDays">-</view>
+        <input class="days-input" type="digit" value="{{days}}" bindinput="onDaysChange"/>
+        <view class="days-btn" bindtap="addDays">+</view>
+        <text class="days-unit">天</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-title">备注</view>
+    <textarea class="remark-input" 
+              placeholder="添加备注（可选）" 
+              value="{{remark}}"
+              bindinput="onRemarkInput"
+              maxlength="200"
+              auto-height/>
+  </view>
+
+  <view class="submit-area">
+    <button class="submit-btn" bindtap="save">保存</button>
+  </view>
+</view>

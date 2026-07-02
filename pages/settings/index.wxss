@@ -1,0 +1,170 @@
+.page {
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+.user-card {
+  position: relative;
+  padding: 80rpx 40rpx 60rpx;
+  margin-bottom: 30rpx;
+}
+
+.user-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 280rpx;
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 50%, #FFB6C1 100%);
+  border-radius: 0 0 60rpx 60rpx;
+}
+
+.user-info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+  margin-right: 24rpx;
+}
+
+.avatar-emoji {
+  font-size: 64rpx;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8rpx;
+}
+
+.user-desc {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stats-row {
+  margin: 0 30rpx 30rpx;
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: linear-gradient(180deg, transparent, #F0F0F0, transparent);
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.stat-num.pink {
+  color: #FF6B9D;
+}
+
+.stat-num.blue {
+  color: #5B8FF9;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.setting-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #999;
+  padding: 0 40rpx 16rpx;
+}
+
+.setting-list {
+  margin: 0 30rpx;
+  padding: 0 32rpx;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 0;
+}
+
+.setting-item.danger .setting-name {
+  color: #FF4D4F;
+}
+
+.setting-divider {
+  height: 1rpx;
+  background: #F5F5F5;
+}
+
+.setting-left {
+  display: flex;
+  align-items: center;
+}
+
+.setting-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+
+.setting-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.setting-right {
+  display: flex;
+  align-items: center;
+}
+
+.setting-value {
+  font-size: 28rpx;
+  color: #999;
+  margin-right: 12rpx;
+}
+
+.arrow {
+  color: #ccc;
+  font-size: 32rpx;
+}
+
+.text-muted {
+  color: #ccc;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 24rpx;
+  color: #ccc;
+  padding: 40rpx 0;
+}

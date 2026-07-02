@@ -1,0 +1,269 @@
+.page {
+  min-height: 100vh;
+  padding: 30rpx;
+  padding-bottom: 120rpx;
+  box-sizing: border-box;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.summary-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.summary-divider {
+  width: 1rpx;
+  height: 80rpx;
+  background: linear-gradient(180deg, transparent, #F0F0F0, transparent);
+  margin: 0 20rpx;
+}
+
+.summary-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.summary-icon.annual {
+  background: linear-gradient(135deg, #FFE8F0, #FFD4E4);
+}
+
+.summary-icon.comp {
+  background: linear-gradient(135deg, #E8F0FF, #D4E4FF);
+}
+
+.summary-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-name {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 6rpx;
+}
+
+.summary-days {
+  display: flex;
+  align-items: baseline;
+}
+
+.days-num {
+  font-size: 44rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #FF6B9D, #FF8FB1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.summary-item:nth-child(3) .days-num {
+  background: linear-gradient(135deg, #5B8FF9, #8FB6FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.days-unit {
+  font-size: 22rpx;
+  color: #999;
+  margin-left: 6rpx;
+}
+
+.tabs {
+  display: flex;
+  padding: 10rpx;
+  margin-bottom: 24rpx;
+  gap: 10rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 26rpx;
+  color: #666;
+  border-radius: 20rpx;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #FF6B9D, #FF8FB1);
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.3);
+}
+
+.record-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.record-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.record-left {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.record-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  margin-top: 8rpx;
+  flex-shrink: 0;
+}
+
+.record-dot.annual {
+  background: #FF6B9D;
+  box-shadow: 0 0 12rpx rgba(255, 107, 157, 0.5);
+}
+
+.record-dot.compensatory {
+  background: #5B8FF9;
+  box-shadow: 0 0 12rpx rgba(91, 143, 249, 0.5);
+}
+
+.record-dot.sick {
+  background: #52C41A;
+  box-shadow: 0 0 12rpx rgba(82, 196, 26, 0.5);
+}
+
+.record-dot.personal {
+  background: #FA8C16;
+  box-shadow: 0 0 12rpx rgba(250, 140, 22, 0.5);
+}
+
+.record-info {
+  flex: 1;
+}
+
+.record-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.record-type {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  margin-right: 16rpx;
+}
+
+.record-date {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 6rpx;
+}
+
+.record-remark {
+  font-size: 22rpx;
+  color: #bbb;
+}
+
+.record-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.record-days {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+
+.record-days.out {
+  color: #FF4D4F;
+}
+
+.record-days.in {
+  color: #52C41A;
+}
+
+.delete-btn {
+  font-size: 22rpx;
+  color: #FF6B9D;
+  padding: 6rpx 16rpx;
+  background: #FFF0F5;
+  border-radius: 16rpx;
+}
+
+.empty {
+  text-align: center;
+  padding: 120rpx 0;
+}
+
+.empty-emoji {
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.empty-tip {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.fab-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 60rpx;
+  width: 110rpx;
+  height: 110rpx;
+  background: linear-gradient(135deg, #FF6B9D, #FF8FB1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 32rpx rgba(255, 107, 157, 0.5);
+  z-index: 999;
+}
+
+.fab-icon {
+  font-size: 56rpx;
+  color: #fff;
+  font-weight: 300;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4rpx 14rpx;
+  border-radius: 16rpx;
+  font-size: 20rpx;
+}
+
+.tag-pink {
+  background: #FFE8F0;
+  color: #FF6B9D;
+}
+
+.tag-green {
+  background: #E8FFF0;
+  color: #52C41A;
+}

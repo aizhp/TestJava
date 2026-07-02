@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/vacation/list",
+    "pages/vacation/add",
+    "pages/trip/list",
+    "pages/trip/add",
+    "pages/trip/detail",
+    "pages/settings/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF6B9D",
+    "navigationBarTitleText": "我的假期",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FFF5F8"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF6B9D",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "🏠 首页"
+      },
+      {
+        "pagePath": "pages/vacation/list",
+        "text": "🌴 假期"
+      },
+      {
+        "pagePath": "pages/trip/list",
+        "text": "✈️ 出差"
+      },
+      {
+        "pagePath": "pages/settings/index",
+        "text": "🐰 我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

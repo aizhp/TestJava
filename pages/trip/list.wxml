@@ -1,0 +1,80 @@
+<view class="page">
+  <view class="stats-card card">
+    <view class="stats-row">
+      <view class="stat-item">
+        <view class="stat-num blue">{{stats.totalDays}}</view>
+        <view class="stat-label">累计出差(天)</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-num pink">¥{{stats.totalSubsidy}}</view>
+        <view class="stat-label">累计补贴</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-num orange">¥{{stats.totalExpenses}}</view>
+        <view class="stat-label">累计报销</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tabs card">
+    <view class="tab-item {{activeTab === 'all' ? 'active' : ''}}" data-tab="all" bindtap="switchTab">
+      全部
+    </view>
+    <view class="tab-item {{activeTab === 'pending' ? 'active' : ''}}" data-tab="pending" bindtap="switchTab">
+      待报销
+    </view>
+    <view class="tab-item {{activeTab === 'submitted' ? 'active' : ''}}" data-tab="submitted" bindtap="switchTab">
+      已提交
+    </view>
+    <view class="tab-item {{activeTab === 'reimbursed' ? 'active' : ''}}" data-tab="reimbursed" bindtap="switchTab">
+      已报销
+    </view>
+  </view>
+
+  <view class="trip-list">
+    <view class="trip-card card" wx:for="{{filteredTrips}}" wx:key="id" data-id="{{item.id}}" bindtap="goToDetail">
+      <view class="trip-header">
+        <view class="trip-left">
+          <text class="trip-emoji">✈️</text>
+          <view class="trip-info">
+            <view class="trip-name">{{item.name}}</view>
+            <view class="trip-destination">📍 {{item.destination}}</view>
+          </view>
+        </view>
+        <view class="trip-status tag tag-{{item.status === 'reimbursed' ? 'green' : item.status === 'submitted' ? 'blue' : 'orange'}}">
+          {{item.statusLabel}}
+        </view>
+      </view>
+      <view class="trip-dates">
+        <text>{{item.startDate}} ~ {{item.endDate}}</text>
+        <text class="trip-days-badge">{{item.days}}天</text>
+      </view>
+      <view class="trip-footer">
+        <view class="footer-item">
+          <text class="footer-label">补贴</text>
+          <text class="footer-value pink">¥{{item.subsidy}}</text>
+        </view>
+        <view class="footer-item">
+          <text class="footer-label">报销</text>
+          <text class="footer-value blue">¥{{item.expenses}}</text>
+        </view>
+        <view class="footer-item">
+          <text class="footer-label">合计</text>
+          <text class="footer-value orange">¥{{item.subsidy + item.expenses}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{filteredTrips.length === 0}}">
+      <view class="empty-emoji">🧳</view>
+      <view class="empty-text">暂无出差记录</view>
+      <view class="empty-tip">点击右下角按钮添加第一条记录吧</view>
+    </view>
+  </view>
+
+  <view class="fab-btn" bindtap="goToAdd">
+    <text class="fab-icon">+</text>
+  </view>
+</view>

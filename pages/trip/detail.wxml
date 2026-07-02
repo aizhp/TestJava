@@ -1,0 +1,76 @@
+<view class="page" wx:if="{{trip}}">
+  <view class="header-card card">
+    <view class="trip-title-row">
+      <view class="trip-title-info">
+        <view class="trip-name">{{trip.name}}</view>
+        <view class="trip-destination">📍 {{trip.destination}}</view>
+      </view>
+      <view class="trip-status tag tag-{{trip.status === 'reimbursed' ? 'green' : trip.status === 'submitted' ? 'blue' : 'orange'}}">
+        {{trip.statusLabel}}
+      </view>
+    </view>
+    <view class="trip-date-range">
+      <text class="date-icon">📅</text>
+      <text>{{trip.startDate}} 至 {{trip.endDate}}</text>
+      <text class="days-badge">共{{trip.days}}天</text>
+    </view>
+  </view>
+
+  <view class="status-card card">
+    <view class="card-title">📌 报销状态</view>
+    <view class="status-options">
+      <view class="status-option {{trip.status === 'pending' ? 'active' : ''}}" 
+            data-status="pending" 
+            bindtap="changeStatus">
+        <view class="status-dot pending"></view>
+        <text>待报销</text>
+      </view>
+      <view class="status-option {{trip.status === 'submitted' ? 'active' : ''}}" 
+            data-status="submitted" 
+            bindtap="changeStatus">
+        <view class="status-dot submitted"></view>
+        <text>已提交</text>
+      </view>
+      <view class="status-option {{trip.status === 'reimbursed' ? 'active' : ''}}" 
+            data-status="reimbursed" 
+            bindtap="changeStatus">
+        <view class="status-dot reimbursed"></view>
+        <text>已报销</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="money-card card">
+    <view class="card-title">💰 费用明细</view>
+    <view class="money-grid">
+      <view class="money-item">
+        <view class="money-icon pink">💵</view>
+        <view class="money-info">
+          <view class="money-label">出差补贴</view>
+          <view class="money-amount pink">¥{{trip.subsidy}}</view>
+        </view>
+      </view>
+      <view class="money-item">
+        <view class="money-icon blue">🧾</view>
+        <view class="money-info">
+          <view class="money-label">报销费用</view>
+          <view class="money-amount blue">¥{{trip.expenses}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="total-row">
+      <text class="total-label">费用合计</text>
+      <text class="total-amount">¥{{trip.subsidy + trip.expenses}}</text>
+    </view>
+  </view>
+
+  <view class="remark-card card" wx:if="{{trip.remark}}">
+    <view class="card-title">📝 备注</view>
+    <view class="remark-text">{{trip.remark}}</view>
+  </view>
+
+  <view class="action-btns">
+    <button class="btn-secondary" bindtap="editTrip">编辑</button>
+    <button class="btn-danger" bindtap="deleteTrip">删除</button>
+  </view>
+</view>

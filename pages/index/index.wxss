@@ -1,0 +1,472 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF0F5 0%, #F0F8FF 50%, #FFF5F8 100%);
+}
+
+.header {
+  position: relative;
+  padding-top: 80rpx;
+}
+
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 380rpx;
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 50%, #FFB6C1 100%);
+  border-radius: 0 0 80rpx 80rpx;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  padding: 40rpx 40rpx 60rpx;
+}
+
+.greeting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.greeting-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.today {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 12rpx;
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+}
+
+.avatar-emoji {
+  font-size: 56rpx;
+}
+
+.content {
+  padding: 0 30rpx;
+  margin-top: -20rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 32rpx;
+  padding: 32rpx;
+  box-shadow: 0 8rpx 40rpx rgba(255, 107, 157, 0.12);
+  margin-bottom: 24rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.8);
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.see-more {
+  font-size: 24rpx;
+  color: #FF6B9D;
+}
+
+.vacation-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.vacation-item {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.divider {
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent, #F0F0F0, transparent);
+  margin: 20rpx 0;
+}
+
+.vacation-icon {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.vacation-item.annual .vacation-icon {
+  background: linear-gradient(135deg, #FFE8F0, #FFD4E4);
+}
+
+.vacation-item.comp .vacation-icon {
+  background: linear-gradient(135deg, #E8F0FF, #D4E4FF);
+}
+
+.vacation-info {
+  flex: 1;
+}
+
+.vacation-name {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.vacation-days {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 12rpx;
+}
+
+.days-num {
+  font-size: 56rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #FF6B9D, #FF8FB1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vacation-item.comp .days-num {
+  background: linear-gradient(135deg, #5B8FF9, #8FB6FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.days-unit {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 8rpx;
+}
+
+.vacation-progress {
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12rpx;
+  background: #F5F5F5;
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  transition: width 0.5s ease;
+}
+
+.annual-fill {
+  background: linear-gradient(90deg, #FF6B9D, #FFB6C1);
+}
+
+.comp-fill {
+  background: linear-gradient(90deg, #5B8FF9, #A0C4FF);
+}
+
+.progress-text {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 160rpx;
+  border-radius: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.96);
+}
+
+.action-btn.pink {
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 100%);
+}
+
+.action-btn.blue {
+  background: linear-gradient(135deg, #5B8FF9 0%, #8FB6FF 100%);
+}
+
+.action-icon {
+  font-size: 56rpx;
+  margin-bottom: 12rpx;
+}
+
+.action-text {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #fff;
+}
+
+.trip-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 10rpx 0 20rpx;
+}
+
+.trip-stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.stat-num.pink {
+  color: #FF6B9D;
+}
+
+.stat-num.blue {
+  color: #5B8FF9;
+}
+
+.stat-num.orange {
+  color: #FA8C16;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.trip-pending {
+  margin-top: 16rpx;
+  padding: 20rpx 24rpx;
+  background: linear-gradient(135deg, #FFF7E6, #FFF0D6);
+  border-radius: 20rpx;
+}
+
+.pending-text {
+  font-size: 26rpx;
+  color: #FA8C16;
+}
+
+.recent-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+
+.recent-item:last-child {
+  border-bottom: none;
+}
+
+.recent-left {
+  display: flex;
+  align-items: center;
+}
+
+.recent-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.recent-dot.annual {
+  background: #FF6B9D;
+  box-shadow: 0 0 12rpx rgba(255, 107, 157, 0.5);
+}
+
+.recent-dot.compensatory {
+  background: #5B8FF9;
+  box-shadow: 0 0 12rpx rgba(91, 143, 249, 0.5);
+}
+
+.recent-dot.sick {
+  background: #52C41A;
+  box-shadow: 0 0 12rpx rgba(82, 196, 26, 0.5);
+}
+
+.recent-dot.personal {
+  background: #FA8C16;
+  box-shadow: 0 0 12rpx rgba(250, 140, 22, 0.5);
+}
+
+.recent-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.recent-date {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.recent-days {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.recent-days.out {
+  color: #FF4D4F;
+}
+
+.recent-days.in {
+  color: #52C41A;
+}
+
+.trip-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+
+.trip-item:last-child {
+  border-bottom: none;
+}
+
+.trip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.trip-name {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.trip-dates {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.trip-date {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.trip-days-count {
+  font-size: 24rpx;
+  color: #5B8FF9;
+  background: #E8F0FF;
+  padding: 4rpx 16rpx;
+  border-radius: 16rpx;
+}
+
+.trip-money {
+  display: flex;
+  gap: 40rpx;
+}
+
+.money-item {
+  display: flex;
+  align-items: center;
+}
+
+.money-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 12rpx;
+}
+
+.money-value {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.money-value.pink {
+  color: #FF6B9D;
+}
+
+.money-value.blue {
+  color: #5B8FF9;
+}
+
+.bottom-space {
+  height: 60rpx;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6rpx 18rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.tag-green {
+  background: #E8FFF0;
+  color: #52C41A;
+}
+
+.tag-blue {
+  background: #E8F0FF;
+  color: #5B8FF9;
+}
+
+.tag-orange {
+  background: #FFF4E8;
+  color: #FA8C16;
+}

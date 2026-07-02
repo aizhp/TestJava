@@ -1,0 +1,109 @@
+<view class="page">
+  <view class="form-card card">
+    <view class="form-row">
+      <view class="form-label">出差名称</view>
+      <input class="form-input" 
+             placeholder="如：上海客户拜访" 
+             data-field="name"
+             value="{{name}}"
+             bindinput="onInput"/>
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-row">
+      <view class="form-label">目的地</view>
+      <input class="form-input" 
+             placeholder="如：上海" 
+             data-field="destination"
+             value="{{destination}}"
+             bindinput="onInput"/>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-row">
+      <view class="form-label">开始日期</view>
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+        <view class="form-value picker">
+          {{startDate}}
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-row">
+      <view class="form-label">结束日期</view>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+        <view class="form-value picker">
+          {{endDate}}
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-row">
+      <view class="form-label">出差天数</view>
+      <view class="form-value highlight">{{days}} 天</view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-row">
+      <view class="form-label">
+        出差补贴
+        <text class="sub-tip">({{subsidyPerDay}}元/天)</text>
+      </view>
+      <view class="form-value pink">¥{{subsidy}}</view>
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-row">
+      <view class="form-label">报销费用</view>
+      <view class="input-with-prefix">
+        <text class="prefix">¥</text>
+        <input class="form-input money-input" 
+               type="digit" 
+               placeholder="0.00" 
+               value="{{expenses}}"
+               bindinput="onExpensesInput"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-title">报销状态</view>
+    <view class="status-options">
+      <view class="status-option {{status === 'pending' ? 'active' : ''}}" 
+            data-status="pending" 
+            bindtap="selectStatus">
+        <view class="status-dot pending"></view>
+        <text>待报销</text>
+      </view>
+      <view class="status-option {{status === 'submitted' ? 'active' : ''}}" 
+            data-status="submitted" 
+            bindtap="selectStatus">
+        <view class="status-dot submitted"></view>
+        <text>已提交</text>
+      </view>
+      <view class="status-option {{status === 'reimbursed' ? 'active' : ''}}" 
+            data-status="reimbursed" 
+            bindtap="selectStatus">
+        <view class="status-dot reimbursed"></view>
+        <text>已报销</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card card">
+    <view class="form-title">备注</view>
+    <textarea class="remark-input" 
+              placeholder="添加备注（可选）" 
+              value="{{remark}}"
+              data-field="remark"
+              bindinput="onInput"
+              maxlength="200"
+              auto-height/>
+  </view>
+
+  <view class="submit-area">
+    <button class="submit-btn" bindtap="save">保存</button>
+  </view>
+</view>
